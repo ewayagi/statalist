@@ -1,6 +1,6 @@
 /******************************************************************************************************
-// Author: Emmanuel Wayagi
-// Content: Basics of STATA 
+Author: Emmanuel Wayagi
+Content: Basics of STATA 
 ******************************************************************************************************/
 // NOTE the Command, Review/ History, Results, Variable and Properties WINDOWS displayed 
 
