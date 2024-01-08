@@ -21,6 +21,7 @@ log using logname.log
 
 *closing a log 
 close log
+capture log close
 *add more outputto the existing log 
 log using manulog.log, append
 *replacing the existing log 
@@ -38,6 +39,9 @@ disp sqrt(36)
 // installing a package
 ssc install oaxaca
 findit tabmiss //oaxaca and tabmiss are the packages
+
+// commad STATA not to pause while running longer results
+set more off
 
 /******************************************************************************************************
 Best Regards 
