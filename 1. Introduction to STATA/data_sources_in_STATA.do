@@ -6,14 +6,15 @@ Content: Data sources in STATA
 // set your working directory
 cd "C:\path_or_directory_location"
 
-// 1. creating a simple dataset = monthly_expenditure
+// 1 creating dataset in stata
+// 1.1 from edit window
 *open the data editor window
 *type 1st column = Months from January to December
 *follow the above steps to add more columns
 
 // randomly creating unique IDs for the observations
 gen id = _n+1002
-order id, first
+order id, first //rearranges id as first variable
 
 *rename variables
 rename (var1 var2 var3 var4 var5 var6 var7 var8) (months monthly_income domestic_travel rent dates foreign_travel investment upkeep)
@@ -44,6 +45,25 @@ save "C:\path_or_directory_location\monthly_expenditure.dta"
 
 // clear the data
 clear
+
+// 1.2 creating dataset from the command line
+input id str5 name age gender income
+0110 OUMA 29 0 10000
+100 WUSU 20 1 102010
+102 IVY 23 0 10000
+1010 CLARA 24 0 15000
+end
+
+// define labeles for the binary/ categorical variables
+label define genderla 0 female 1 male
+// lable the values
+la val gender genderla
+// lable the variables
+la var id "id"
+la var name "name of the student"
+la var age "age of the student"
+la var gender "gender of the student"
+la var income "income of the student"
 
 // 2. open existing stata data
 *remember to set the directory to match the data source
