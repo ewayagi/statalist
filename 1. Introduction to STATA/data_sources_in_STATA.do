@@ -11,6 +11,10 @@ cd "C:\path_or_directory_location"
 *type 1st column = Months from January to December
 *follow the above steps to add more columns
 
+// randomly creating unique IDs for the observations
+gen id = _n+1002
+order id, first
+
 *rename variables
 rename (var1 var2 var3 var4 var5 var6 var7 var8) (months monthly_income domestic_travel rent dates foreign_travel investment upkeep)
 
