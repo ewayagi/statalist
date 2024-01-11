@@ -33,7 +33,7 @@ search logit
 net search logit
 
 // simple arithmetics
-disp 12 +-*/ 2
+disp 12 +-*/^ 2
 disp sqrt(36)
 
 // installing a package
