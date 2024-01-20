@@ -71,7 +71,7 @@ la val ext_appearance ext_appearancela
 lab var variety "external appearance of selected variety"
 
 // save the changes in the data
-save "C:\path_or_directory_location/spdata.dta", replace
+save "spdata.dta", replace
 // clear memory and logs
 clear all
 
