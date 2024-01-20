@@ -41,7 +41,8 @@ order cooking_end_time q4_aroma q12_flesh_color q21_mealiness_hand q22_stickines
 lab var farmer_id "farmer id"
 lab var cooking_start_time "potato cooking start time"
 
-// destring the var by defining and labeling the values 
+// destring the var by defining and labeling the values
+*binary var (0,1)
 replace intervention = "0" if regexm(intervention,"no")
 replace intervention = "1" if regexm(intervention,"yes")
 destring intervention, replace
@@ -49,6 +50,7 @@ la define interventionla 0 "no" 1 "yes"
 la val intervention interventionla
 lab var intervention "group of potato cosumer intervention"
 
+*categorical var (1,2,3...n)
 rename selected_variety variety
 replace variety = "1" if regexm(variety,"Ejumula")
 replace variety = "2" if regexm(variety,"Narospot 1")
