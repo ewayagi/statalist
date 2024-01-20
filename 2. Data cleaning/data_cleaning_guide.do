@@ -59,17 +59,6 @@ la define varietyla 1 "Ejumula" 2 "Narospot 1" 3 "Naspot 13" 4 "Tanzania"
 la val variety varietyla
 lab var variety "selected varieties for intervention"
 
-rename q11_ext_appearance ext_appearance
-replace ext_appearance = "1" if regexm(ext_appearance,"Just about Right")
-replace ext_appearance = "2" if regexm(ext_appearance,"Much Too Little")
-replace ext_appearance= "3" if regexm(ext_appearance,"Much Too Much")
-replace ext_appearance = "4" if regexm(ext_appearance,"Too Little")
-replace ext_appearance = "5" if regexm(ext_appearance,"Too Much")
-destring ext_appearance, replace
-la define ext_appearancela 1 "Just about Right" 2 "Much Too Little" 3 "Much Too Muc" 4 "Too Little" 5 "Too Much"
-la val ext_appearance ext_appearancela
-lab var variety "external appearance of selected variety"
-
 // save the changes in the data
 save "spdata.dta", replace
 // clear memory and logs
