@@ -43,6 +43,26 @@ findit tabmiss //oaxaca and tabmiss are the packages
 // commad STATA not to pause while running longer results
 set more off
 
+// long line commands
+*use ///
+order cooking_end_time q4_aroma q12_flesh_color q21_mealiness_hand q22_stickiness_hand q23_mealiness_mouth ///
+q24_softness q25_hardness q26_stickiness_mouth q27_crumbliness q28_fibrousness q31_sweetness q32_aftertaste  ///
+q4_cookingtime q9_overalliking q6_normal_sp_prep_mthd q6_normal_sp_prep_mthd_or q7_preparedifferently ///
+q8_pref_dif_prep_method q8_pref_dif_prep_method_or, before(enum) 
+
+*use */
+order cooking_end_time q4_aroma q12_flesh_color q21_mealiness_hand q22_stickiness_hand q23_mealiness_mouth /*
+*/q24_softness q25_hardness q26_stickiness_mouth q27_crumbliness q28_fibrousness q31_sweetness q32_aftertaste  /*
+*/q4_cookingtime q9_overalliking q6_normal_sp_prep_mthd q6_normal_sp_prep_mthd_or q7_preparedifferently /*
+*/q8_pref_dif_prep_method q8_pref_dif_prep_method_or, before(enum)
+
+*delimit
+#delimit ;
+order cooking_end_time q4_aroma q12_flesh_color q21_mealiness_hand q22_stickiness_hand q23_mealiness_mouth
+	q24_softness q25_hardness q26_stickiness_mouth q27_crumbliness q28_fibrousness q31_sweetness q32_aftertaste q4_cookingtime 
+	q9_overalliking q6_normal_sp_prep_mthd q6_normal_sp_prep_mthd_or q7_preparedifferently q8_pref_dif_prep_method 
+	q8_pref_dif_prep_method_or, before(enum) ;
+
 /******************************************************************************************************
 Best Regards 
 Emmanuel Wayagi 
