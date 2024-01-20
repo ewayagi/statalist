@@ -21,33 +21,54 @@ IDs with unique val */
 isid farmer_id
 duplicates report farmer_id // checks for duplicates 
 
-// Part A
+ //Part A
 // Consumer Intervention Sample Selection
-// rename var and labels
-rename (selected_variety q11_ext_appearance) (variety ext_appearance)
-lab var farmer_id "farmer id"
-lab var variety "selected potato variety for cooking test"
-lab var ext_appearance "external appearance of selected potato"
-lab var cooking_start_time "potato cooking start time"
 // grouping data into consumers under the potato intervention or otherwise 
 // this requires that you gen and replace string variables and values 
 // note that for the string we use this "" for blank while for numeric type we use . for missing values
 gen intervention = ""
-replace intervention = "yes" if variety != ""
-replace intervention = "no" if variety == ""
-// destrin the intervention var by defining and labeling the values 
+replace intervention = "yes" if selected_variety != ""
+replace intervention = "no" if selected_variety == ""
+
+// ordering var
+order intervention, before(selected_variety)
+order cooking_end_time q4_aroma q12_flesh_color q21_mealiness_hand q22_stickiness_hand q23_mealiness_mouth /*
+*/q24_softness q25_hardness q26_stickiness_mouth q27_crumbliness q28_fibrousness q31_sweetness q32_aftertaste  /*
+*/q4_cookingtime q9_overalliking q6_normal_sp_prep_mthd q6_normal_sp_prep_mthd_or q7_preparedifferently /*
+*/q8_pref_dif_prep_method q8_pref_dif_prep_method_or, before(enum)
+
+// rename var and labels
+lab var farmer_id "farmer id"
+lab var cooking_start_time "potato cooking start time"
+
+// destring the var by defining and labeling the values 
 replace intervention = "0" if regexm(intervention,"no")
 replace intervention = "1" if regexm(intervention,"yes")
 destring intervention, replace
 la define interventionla 0 "no" 1 "yes"
 la val intervention interventionla
 lab var intervention "group of potato cosumer intervention"
-// ordering var
-order intervention, before(variety )
-order cooking_end_time q4_aroma q12_flesh_color q21_mealiness_hand q22_stickiness_hand q23_mealiness_mouth ///
-q24_softness q25_hardness q26_stickiness_mouth q27_crumbliness q28_fibrousness q31_sweetness q32_aftertaste  ///
-q4_cookingtime q9_overalliking q6_normal_sp_prep_mthd q6_normal_sp_prep_mthd_or q7_preparedifferently ///
-q8_pref_dif_prep_method q8_pref_dif_prep_method_or, before(enum)
+
+rename selected_variety variety
+replace variety = "1" if regexm(variety,"Ejumula")
+replace variety = "2" if regexm(variety,"Narospot 1")
+replace variety = "3" if regexm(variety,"Naspot 13")
+replace variety = "4" if regexm(variety,"Tanzania")
+destring variety, replace
+la define varietyla 1 "Ejumula" 2 "Narospot 1" 3 "Naspot 13" 4 "Tanzania"
+la val variety varietyla
+lab var variety "selected varieties for intervention"
+
+rename q11_ext_appearance ext_appearance
+replace ext_appearance = "1" if regexm(ext_appearance,"Just about Right")
+replace ext_appearance = "2" if regexm(ext_appearance,"Much Too Little")
+replace ext_appearance= "3" if regexm(ext_appearance,"Much Too Much")
+replace ext_appearance = "4" if regexm(ext_appearance,"Too Little")
+replace ext_appearance = "5" if regexm(ext_appearance,"Too Much")
+destring ext_appearance, replace
+la define ext_appearancela 1 "Just about Right" 2 "Much Too Little" 3 "Much Too Muc" 4 "Too Little" 5 "Too Much"
+la val ext_appearance ext_appearancela
+lab var variety "external appearance of selected variety"
 
 // save the changes in the data
 save "C:\path_or_directory_location/spdata.dta", replace
