@@ -21,6 +21,7 @@ IDs with unique val */
 isid farmer_id
 duplicates report farmer_id // checks for duplicates 
 
+// Part A
 // Consumer Intervention Sample Selection
 // rename var and labels
 rename (selected_variety q11_ext_appearance) (variety ext_appearance)
@@ -32,7 +33,6 @@ lab var cooking_start_time "potato cooking start time"
 // this requires that you gen and replace string variables and values 
 // note that for the string we use this "" for blank while for numeric type we use . for missing values
 gen intervention = ""
-order intervention, before(variety )
 replace intervention = "yes" if variety != ""
 replace intervention = "no" if variety == ""
 // destrin the intervention var by defining and labeling the values 
@@ -42,12 +42,16 @@ destring intervention, replace
 la define interventionla 0 "no" 1 "yes"
 la val intervention interventionla
 lab var intervention "group of potato cosumer intervention"
+// ordering var
+order intervention, before(variety )
+order cooking_end_time q4_aroma q12_flesh_color q21_mealiness_hand q22_stickiness_hand q23_mealiness_mouth q24_softness q25_hardness q26_stickiness_mouth q27_crumbliness q28_fibrousness q31_sweetness q32_aftertaste q4_cookingtime q9_overalliking q6_normal_sp_prep_mthd q6_normal_sp_prep_mthd_or q7_preparedifferently q8_pref_dif_prep_method q8_pref_dif_prep_method_or, before(enum)
+
 // save the changes in the data
 save "C:\path_or_directory_location/spdata.dta", replace
 // clear memory and logs
 clear all
 
-// Part A 
+// Part B 
 capture log close 
 log using manulog.log, replace 
 set more off 
