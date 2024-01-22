@@ -84,6 +84,14 @@ order cooking_time_minutes, before(ext_appearance)
 lab var cooking_time_minutes "potato cooking time in minutes"
 // droping var
 drop cooking_start_time cooking_end_time cooking_time
+// rename var
+rename (cooking_time_minutes q4_cookingtime ext_appearance q4_aroma q12_flesh_color q21_mealiness_hand ///
+q22_stickiness_hand q23_mealiness_mouth q24_softness q25_hardness q26_stickiness_mouth q27_crumbliness ///
+q28_fibrousness q31_sweetness q32_aftertaste q9_overalliking q6_normal_sp_prep_mthd q6_normal_sp_prep_mthd_or ///
+q7_preparedifferently q8_pref_dif_prep_method q8_pref_dif_prep_method_or) (cooking_time cooking_time_rate ///
+ext_appearance_rate aroma_rate flesh_color_rate mealiness_hand_rate stickiness_hand_rate mealiness_mouth_rate ///
+softness_rate hardness_rate stickiness_mouth_rate crumbliness_rate fibrousness_rate sweetness_rate aftertaste_rate ///
+liking_rate norm_prep_mtd other_norm_prep_mtd diff_prep_mtd pref_prep_mtd other_pref_prep_mtd)
 
 // save the changes in the data
 save "spdata.dta", replace
