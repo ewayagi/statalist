@@ -61,14 +61,31 @@ la define varietyla 1 "Ejumula" 2 "Narospot 1" 3 "Naspot 13" 4 "Tanzania"
 la val variety varietyla
 lab var variety "selected varieties for intervention"
 
+// STATA datetime var
+/* truncating part of a string  time val eg 18:11:00.000+03:00 to 18:11:00.000
+note that the UTC (+03:00) is a plain character*/
+replace cooking_start_time = subinstr(cooking_start_time ,"+03:00", "", .)
+replace cooking_end_time = subinstr(cooking_end_time ,"+03:00", "", .)
+/*converting time stored a string to STATA time format 
+type help datetime for more and suitable formats
+also read more here https://www.stata.com/manuals13/u24.pdf*/
+gen double cooking_time_begin = clock(cooking_start_time, "hms")
+order cooking_time_begin, before(cooking_start_time)
+gen double cooking_time_end = clock(cooking_end_time, "hms")
+order cooking_time_end, before(cooking_end_time)
+lab var cooking_time_begin "potato cooking start time"
+lab var cooking_time_end "potato cooking stop time"
+*gen time taken to cook the selected potato
+gen cooking_time = cooking_time_end - cooking_time_begin
+order cooking_time, before(ext_appearance)
+*convert the generated STATA time to minutes
+gen cooking_time_minutes = cooking_time/msofminutes(1)
+order cooking_time_minutes, before(ext_appearance)
+lab var cooking_time_minutes "potato cooking time in minutes"
+// droping var
+drop cooking_start_time cooking_end_time cooking_time
+
 // save the changes in the data
 save "spdata.dta", replace
 // clear memory and logs
 clear all
-
-// Part B 
-capture log close 
-log using manulog.log, replace 
-set more off 
-cd "C:\path_or_directory_location"
-use spdata,clear
