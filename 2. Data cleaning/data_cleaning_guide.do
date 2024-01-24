@@ -61,6 +61,23 @@ la define varietyla 1 "Ejumula" 2 "Narospot 1" 3 "Naspot 13" 4 "Tanzania"
 la val variety varietyla
 lab var variety "selected varieties for intervention"
 
+/*but this may be time-comsuming especially if you have many var with similar observation categories 
+to save time, use the loop function 
+in this example consumers are rating different aspects of a potato variety 
+e.g. cooking time, aroma...aftertaste
+each of the obs have 5 similar categories*/
+
+foreach x of varlist cook_time-aftertaste{
+		replace `x'="1" if regexm( `x', "Just about Right" )
+		replace `x'="2" if regexm( `x', "Much Too Little" )
+		replace `x'="3" if regexm( `x', "Much Too Much" )
+		replace `x'="4" if regexm( `x', "Too Little" )
+		replace `x'="5" if regexm( `x', "Too Much" )
+		destring `x', replace
+		la define `x'la 1 "Just about Right" 2 "Much Too Little" 3 "Much Too Muc" 4 "Too Little" 5 "Too Much"
+		la val `x' `x'la
+}
+
 // STATA datetime var
 /* truncating part of a string  time val eg 18:11:00.000+03:00 to 18:11:00.000
 note that the UTC (+03:00) is a plain character*/
@@ -94,6 +111,7 @@ aroma flesh_color mealiness_hand stickiness_hand mealiness_mouth softness hardne
 sweetness aftertaste liking norm_prep_mtd other_norm_prep_mtd diff_prep_mtd pref_prep_mtd other_pref_prep_mtd)
 
 // lab multiple var at once using a loop function
+// note that the labelling must have similar or common wordings for the syntax to work 
 foreach var of varlist cook_time-liking{
    la var  `var' "`var' rating"
 }
