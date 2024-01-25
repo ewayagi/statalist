@@ -116,6 +116,14 @@ foreach var of varlist cook_time-liking{
    la var  `var' "`var' rating"
 }
 
+/* replacing values in one var with those of other vars
+this is useful in vars with choices such that some responses are recorder in OTHERS-SPECIFY category
+in such case, tab both var to see if the responses are similar
+or create more categories with the additional responses by replacing - if command*/
+replace pref_prep_mtd = "Roasting" if  other_pref_prep_mtd == "Roasting with soil (emukaru)" | ///
+other_pref_prep_mtd == "Roasting with soil - emukaru"
+drop other_pref_prep_mtd
+
 // save the changes in the data
 save "spdata.dta", replace
 // clear memory and logs
