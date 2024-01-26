@@ -95,6 +95,7 @@ browse
 edit
 *checking for missing values
 tabmiss
+tabmiss(var_name)
 misstable sum
 *view data structure
 describe
