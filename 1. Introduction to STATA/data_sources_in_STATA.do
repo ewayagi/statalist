@@ -103,7 +103,8 @@ describe
 summarize
 *list variable names
 ds
-
+*searching for a var in varlist
+lookfor "hint"
 /******************************************************************************************************
 Best Regards 
 Emmanuel Wayagi 
