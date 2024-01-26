@@ -58,8 +58,8 @@ replace variety = "3" if regexm(variety,"Naspot 13")
 replace variety = "4" if regexm(variety,"Tanzania")
 destring variety, replace
 
-/* note that sometimes, destring fn fails, in that case you can use
-encode variety, gen(variety2) */
+/*note that sometimes, destring command fails, in that case you can use
+encode variety, gen(variety2)*/
 
 la define varietyla 1 "Ejumula" 2 "Narospot 1" 3 "Naspot 13" 4 "Tanzania"
 la val variety varietyla
